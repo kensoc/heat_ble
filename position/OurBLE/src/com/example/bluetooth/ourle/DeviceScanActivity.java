@@ -24,6 +24,8 @@ import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.PointF;
+import android.graphics.RectF;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -44,6 +46,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Activity for scanning and displaying available Bluetooth LE devices.
@@ -53,10 +56,22 @@ public class DeviceScanActivity extends ListActivity {
     private BluetoothAdapter mBluetoothAdapter;
     private boolean mScanning;
     private Handler mHandler;
-
+    HashMap<String, ArrayList<Integer>> mRssiDbMap;
+    
     private static final int REQUEST_ENABLE_BT = 1;
     // Stops scanning after 5 seconds.
     private static final long SCAN_PERIOD = 5000;
+    
+    // TODO: initial values
+    private static final String ADDRESS_0 = new String("C7:B9:5F:FC:29:82");
+    private static final String ADDRESS_1 = new String("FA:30:A2:4F:E6:48");
+    private static final double N_0 = 0.830482;
+    private static final double N_1 = 0.498289;
+    private static final int A_0 = 85;
+    private static final int A_1 = 88;
+    private static final PointF POS_0 = new PointF(0, 0);
+    private static final PointF POS_1 = new PointF(20, 0);
+    private static final RectF TARGET = new RectF(8, -5, 15, 5);
 
     
     @Override
@@ -84,6 +99,8 @@ public class DeviceScanActivity extends ListActivity {
             finish();
             return;
         }
+        
+        mRssiDbMap = new HashMap<String, ArrayList<Integer>>();
     }
 
     @Override
@@ -115,11 +132,7 @@ public class DeviceScanActivity extends ListActivity {
                 scanLeDevice(false);
                 break;
             case R.id.menu_report:
-            	// TODO: report RSSI and address tuples to remote servers
-            	// make a positioning function and put it here
-            	// and change reportRSSI to sendLEDCommand or the like
             	reportRSSI();
-            	Toast.makeText(this, R.string.report_rssi_called, Toast.LENGTH_SHORT).show();
             	break;
         }
         return true;
@@ -171,7 +184,6 @@ public class DeviceScanActivity extends ListActivity {
         return;
     }
 
-    // TODO perform HTTP operations in another thread
     private class reportRSSITask extends AsyncTask<String,Void,Void> {
     	protected Void doInBackground(String...args) {
     		System.out.println("reportRSSItask:background:"+args.length);
@@ -200,18 +212,100 @@ public class DeviceScanActivity extends ListActivity {
     	}
     };
     
-    // TODO spawn HTTP threads
+	public static double getDistRSSI(double n, int a, int rssi) {
+		return Math.pow(10.0, -(a+rssi)/(10*n));
+	}
+	
+	public static double getDistRSSI(double n, int a, ArrayList<Integer> rssiDb) {
+		// TODO: magic
+		// NOTE: these coefficients must sum to 1
+		double coef[] = { 0.96, 0.02, 0.01, 0.005, 0.003, 0.001, 0.001, 0, 0, 0 };
+		while (rssiDb.size() > 10) {
+			rssiDb.remove(0);
+		}
+		double eRSSI = 0;
+		for (int i = 0;i < rssiDb.size();i ++) {
+			eRSSI += rssiDb.get(rssiDb.size() - i - 1) * coef[i];
+		}
+		return getDistRSSI(n, a, (int)eRSSI);
+	}
+	
+	public static int findPosition(PointF c1, double r1, PointF c2, double r2, PointF p1, PointF p2)
+	{
+		// http://blog.csharphelper.com/2010/03/29/determine-where-two-circles-intersect-in-c.aspx
+		double dx = c1.x - c2.x;
+		double dy = c1.y - c2.y;
+		double dist = Math.sqrt(dx*dx + dy*dy);
+		
+		if (dist > r1 + r2) {
+			// the formed circles are too far apart to intersect
+			return 0;
+		}
+		if (dist < Math.abs(r1 - r2)) {
+			// one circle is within the other
+			return 0;
+		}
+		if (dist == 0 && r1 == r2) {
+			// circles coincide
+			return 0;
+		}
+		
+		double a = (r1*r1 - r2*r2 + dist*dist) / (2*dist);
+		double h = Math.sqrt(r1*r1 - a*a);
+		
+		double cx2 = c1.x + a*(c2.x - c1.x)/dist;
+		double cy2 = c1.y + a*(c2.y - c1.y)/dist;
+		
+		p1.set((float)(cx2 + h*(c2.y-c1.y)/dist),
+				                  (float)(cy2 - h*(c2.x-c1.x)/dist));
+		p2.set((float)(cx2 - h*(c2.y-c1.y)/dist),
+                                  (float)(cy2 + h*(c2.x-c1.x)/dist));
+
+		if (dist == r1 + r2) return 1;
+		return 2;
+	}
+	
     private void reportRSSI() {
     	System.out.println("reportRSSI()");
+    	
+    	String toast = new String("");
+    	if (mRssiDbMap.get(ADDRESS_0) == null || mRssiDbMap.get(ADDRESS_1) == null) {
+    		toast = "NO ENOUGH DEVICES";
+    		Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
+    		return;
+    	}
+    	double dist_0 = getDistRSSI(N_0, A_0, mRssiDbMap.get(ADDRESS_0));
+    	double dist_1 = getDistRSSI(N_1, A_1, mRssiDbMap.get(ADDRESS_1));
+    	PointF p1 = new PointF();
+    	PointF p2 = new PointF();
+    	int np = findPosition(POS_0, dist_0, POS_1, dist_1, p1, p2);
+    	toast += "np:"+np;
+    	boolean inTarget = false;
+    	if (np > 0) {
+    		toast += " p1:("+p1.x+","+p1.y+") ";
+    		if (TARGET.contains(p1.x, p1.y)){
+    			inTarget = true;
+    		}
+    		if (np == 2) {
+    			toast += " p2:("+p2.x+","+p2.y+") ";
+    			if (TARGET.contains(p2.x, p2.y)) {
+    				inTarget = true;
+    			}
+    		}
+    	}
+    	toast += " d0:"+dist_0+" d1:"+dist_1;
     	String query_string = new String("");
-		for (int i = 0;i < mLeDeviceListAdapter.getCount();i ++) {
-			if (i > 0) { query_string += "&"; }
-			query_string += "a=" + mLeDeviceListAdapter.getDevice(i).getAddress();
-			query_string += "&r=" + mLeDeviceListAdapter.getRSSI(i);
-		}
+    	if (inTarget) {
+    		toast += " IN";
+    		query_string = "Z";
+    	} else {
+    		query_string = "X";
+    	}
+    	Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
+    	
 		// TODO: Hard coded IPs/URLs
-    	new reportRSSITask().execute("http://192.168.1.201/?"+query_string);
-    	new reportRSSITask().execute("http://192.168.1.202/?"+query_string);
+    	new reportRSSITask().execute("http://192.168.1.201/"+query_string);
+    	new reportRSSITask().execute("http://192.168.1.202/"+query_string);
     }
     
     private void scanLeDevice(final boolean enable) {
@@ -327,6 +421,20 @@ public class DeviceScanActivity extends ListActivity {
                 public void run() {
                     mLeDeviceListAdapter.addDevice(device, rssi);
                     mLeDeviceListAdapter.notifyDataSetChanged();
+                    ArrayList<Integer> rssiDb = mRssiDbMap.get(device.getAddress());
+                    if ( rssiDb == null ) {
+                    	rssiDb = new ArrayList<Integer>();
+                    	mRssiDbMap.put(device.getAddress(), rssiDb);
+                    }
+                    while (rssiDb.size() > 10) {
+                    	rssiDb.remove(0);
+                    }
+                    rssiDb.add(rssi);
+                    double sum = 0;
+                    for (int i = 0;i < rssiDb.size();i ++) {
+                    	sum += rssiDb.get(i);
+                    }
+                    System.out.println("Device - "+device.getAddress()+" avgRSSI: "+ (int)(sum/rssiDb.size()) );
                 }
             });
         }
