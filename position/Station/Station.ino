@@ -7,10 +7,10 @@
 #define STATION_NUMBER 0
 
 #if STATION_NUMBER == 0
-byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xE1 };
+byte mac[] = { 0x90, 0xA2, 0xDA, 0x07, 0x76, 0x1E };
 IPAddress ip(192, 168, 1, 201);
 #elif STATION_NUMBER == 1
-byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xE2 };
+byte mac[] = { 0x90, 0xA2, 0xDA, 0x07, 0x76, 0x18 };
 IPAddress ip(192, 168, 1, 202);
 #endif
 
@@ -94,6 +94,8 @@ void do_ble_loop() {
   ble_do_events();
 }
 
+// GET /X  to turn off LED
+// GET /Z  to turn on LED
 void do_web_loop() {
   SPI.setBitOrder(MSBFIRST);
   SPI.setClockDivider(SPI_CLOCK_DIV4);
@@ -102,9 +104,10 @@ void do_web_loop() {
   EthernetClient client = server.available();
   if (client) {
     Serial.println("new client");
-    digitalWrite(LED, HIGH);
     // an http request ends with a blank line
     boolean currentLineIsBlank = true;
+    boolean commandReceived = false;
+    char last_read = 0;
     while (client.connected()) {
       if (client.available()) {
         char c = client.read();
@@ -126,15 +129,20 @@ void do_web_loop() {
         else if (c != '\r') {
           // you've gotten a character on the current line
           currentLineIsBlank = false;
+          if (last_read == '/' && !commandReceived) {
+            if (c == 'X') { digitalWrite(LED, LOW); }
+            if (c == 'Z') { digitalWrite(LED, HIGH); }
+            commandReceived = true;
+          }
         }
-      }
-    }
+        last_read = c;
+      } // if client.available()
+    } // while (client.connected())
     // give the web browser time to receive the data
     delay(1);
     // close the connection:
     client.stop();
     Serial.println("client disconnected");
-    digitalWrite(LED, LOW);
   }
 }
 
