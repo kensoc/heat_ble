@@ -63,24 +63,27 @@ void setup() {
 
   SPI.begin();
   SPI.setDataMode(SPI_MODE0);
+  delay(1);
   
   SPI.setBitOrder(LSBFIRST);
   SPI.setClockDivider(SPI_CLOCK_DIV16);
+  delay(1);
   ble_begin();  
   digitalWrite(BLEREQN, HIGH);
   digitalWrite(ETHCS, HIGH);
-  delay(50);
+  delay(1);
   
   digitalWrite(ETHCS, LOW);
   SPI.setBitOrder(MSBFIRST);
   SPI.setClockDivider(SPI_CLOCK_DIV4);
+  delay(1);
   Ethernet.begin(mac, ip);
   server.begin();
   Serial.print("Web server IP:");
   Serial.println(Ethernet.localIP());
   digitalWrite(ETHCS, HIGH);
   digitalWrite(BLEREQN, HIGH);
-  delay(50);
+  delay(1);
   
   Serial.print("This is station #");
   Serial.print(STATION_NUMBER);
