@@ -115,12 +115,37 @@ The theoretical relationship between RSSI and distance between two devices is th
   RSSI = -(10n \log_{10}d + A)
 \end{equation}
 
-where, n,d and A are signal propagation constant, distance from sender and received signal strength at 1 meter distance
+where, n,d and A are signal propagation constant, distance from sender and received signal strength at 1 meter distance. \\
 
+If d=1, then A=RSSI. For other distances (e.g., d=4) we can get the value of n from measured A and RSSI values from the following equation:
+
+\begin{equation}
+ n = -(\frac{ meanRSSI-A}{10 \log_{10}d})
+\end{equation}
+
+Here, meanRSSI is the mean of 10 samples of RSSI values obtained from device scan discovery mechanism of Android phone.
 
 \section{Experimentation Setup}
 
+\subsection{Implementation on Android Phone}
+
+Using LG nexus 4 phones and Android development tools, we developed test applications that continuously scan for BLE devices using Android 4.3 BLE API. The GATT profile is a general specification for sending and receiving short pieces of data known as "attributes" over a BLE link. All current Low Energy application profiles are based on GATT. GATT is built on top of the Attribute Protocol (ATT). This is also referred to as GATT/ATT. ATT is optimized to run on BLE devices. Each attribute is uniquely identified by 128-bit format a Universally Unique Identifier (UUID). The attributes transported by ATT are formatted as characteristics and services.
+
+\subsection{Arduino with BLE shield}
+
+Bluetooth Low Energy Shield has been used to interface Arduino with Android device. It works with all Arduino boards, including Arduino Uno, Mega 2560, Leonardo, and Due. 
+
+\subsection{Environment Setup}
+
+The system ~\ref{fig1} consists of two Arduino nodes located at two fixed positions and continuously scanning for Bluetooth LE (BLE) devices in the home area. These two stationary nodes calculate the distance between them and the other Bluetooth LE devices. When the phone moves to the green marks, it send indication to Arduino devices to light on using http request.
+
+
+
+
+
 \subsection{Calibration}
+
+First, we place one Arduino device 1m distant from Android phone, scan 10 times and store RSSI samples. We take the mean of these RSSI samples and calculate A. Then we place the phone 4m away from the Arduino device, measure the value of n. The same process is repeated for the other Arduino device to determine A and n for that.
 
 
 
@@ -129,8 +154,17 @@ where, n,d and A are signal propagation constant, distance from sender and recei
 \includegraphics[scale=0.5]{position.png}  
 \caption{Experimental Setup}
 \label{fig1}
+\end{figure}
 
+\subsection{Distance Calculation}
 
+To estimate the position of the blind node, at least three reference nodes in the network must be
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{intr.jpg}  
+\caption{Two possible position that may be in Marked region}
+\label{fig2}
 \end{figure}
 
 \section{Result}
