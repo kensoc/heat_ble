@@ -94,7 +94,10 @@ Arduino is an open-source physical computing platform based on a simple i/o boar
 
 \section{Introduction}
 % no \IEEEPARstart
-Arduino is an open-source physical computing platform based on a simple i/o board and a development environment that implements the Processing/Wiring language. Arduino can be used to develop stand-alone interactive objects or can be connected to software on your computer (e.g. Flash, Processing, MaxMSP). BLE Shield stands for Bluetooth Low Energy (BLE) Shield that is designed to work with Arduino boards, including Arduino Uno, Mega 2560, Leonardo and Due. It allows us to connect Arduino board with other BLE Central device like a smartphone or tablet. Android 4.3 (API Level 18) introduces built-in platform support for Bluetooth Low Energy in the central role and provides APIs that apps can use to discover devices, query for services, and read/write characteristics.
+Arduino is an open-source physical computing platform based on a simple i/o board and a development environment that implements the Processing/Wiring language. Arduino can be used to develop stand-alone interactive objects or can be connected to software on your computer (e.g. Flash, Processing, MaxMSP). BLE Shield stands for Bluetooth Low Energy (BLE) Shield that is designed to work with Arduino boards, including Arduino Uno, Mega 2560, Leonardo and Due. It allows us to connect Arduino board with other BLE Central device like a smartphone or tablet. Android 4.3 (API Level 18) introduces built-in platform support for Bluetooth Low Energy in the central role and provides APIs to discover devices, query for services, and read/write characteristics.
+
+However, a BLE enabled Android smartphone can discover other BLE enabled devices within range. Android BLE API support getting Received Signal Strength Indicator (RSSI). It is the measured power of a received radio signal. There are quite a number of RSSI-based localization techniques like triangulation and fingerprinting. None of them are precise in estimation. RSSI values itself affected by many factors like obstacles, multipath fading, antenna polarization and cross-body shielding.
+
 
 
 
@@ -104,10 +107,10 @@ Arduino is an open-source physical computing platform based on a simple i/o boar
 % exclusively. Note that, LaTeX2e, unlike IEEE journals/conferences, places
 % footnotes above bottom floats. This can be corrected via the \fnbelowfloat
 % command of the stfloats package.
-\section{Algorithm}
+\section{Mechanisms}
 
 
-
+The theoretical relationship between RSSI and distance between two devices is the following:
 \begin{equation}
   RSSI = -(10n \log_{10}d + A)
 \end{equation}
@@ -130,6 +133,9 @@ where, n,d and A are signal propagation constant, distance from sender and recei
 
 \section{Analysis}
 
+This work was based on bluetooth positioning. After experimentation, we can conclude that it is not quite as easy as detecting the signal strength. Accurate and precise results depend on many factors, even what kind of phone we used in our experiment, the environment and how it might effect the signal strength, and also obstacles that may interfere with the signal, such as people, walls, tables. Additionally, phone orientation at a particular place experienced different RSSI values.
+
+However, as we noticed that the signal strengths significantly varied, we planned to do a lot of calibration. The RSSI value can estimate distance that might be basic near or far result. 
 
 \section{Conclusion}
 The conclusion goes here.
