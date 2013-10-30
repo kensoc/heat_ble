@@ -1,5 +1,6 @@
 \documentclass[conference,a4paper]{../../sty/IEEEtran}
 
+\usepackage{graphicx}
 
 % *** GRAPHICS RELATED PACKAGES ***
 \ifCLASSINFOpdf
@@ -76,8 +77,9 @@ zhen-huan.hwang and hasan.islam @aalto.fi}}
 
 
 \begin{abstract}
-%\boldmath
-The abstract goes here.
+
+Arduino is an open-source physical computing platform based on a simple i/o board and a development environment that implements the Processing/Wiring language. In this article, we will present a prototype of indoor positioning system using Arduino device and BLE shield which is designed to work with Arduino boards, including Arduino Uno, Mega 2560, Leonardo and Due. It allows us to connect Arduino board with other BLE Central device like a smartphone or tablet. 
+
 \end{abstract}
 % IEEEtran.cls defaults to using nonbold math in the Abstract.
 % This preserves the distinction between vectors and scalars. However,
@@ -92,16 +94,7 @@ The abstract goes here.
 
 \section{Introduction}
 % no \IEEEPARstart
-This demo file is intended to serve as a ``starter file''
-for IEEE conference papers produced under \LaTeX\ using
-IEEEtran.cls version 1.7 and later.\cite{IEEEhowto:IEEEtranpage}
-
-\subsection{Subsection Heading Here}
-Subsection text here.
-
-
-\subsubsection{Subsubsection Heading Here}
-Subsubsection text here.
+Arduino is an open-source physical computing platform based on a simple i/o board and a development environment that implements the Processing/Wiring language. Arduino can be used to develop stand-alone interactive objects or can be connected to software on your computer (e.g. Flash, Processing, MaxMSP). BLE Shield stands for Bluetooth Low Energy (BLE) Shield that is designed to work with Arduino boards, including Arduino Uno, Mega 2560, Leonardo and Due. It allows us to connect Arduino board with other BLE Central device like a smartphone or tablet. Android 4.3 (API Level 18) introduces built-in platform support for Bluetooth Low Energy in the central role and provides APIs that apps can use to discover devices, query for services, and read/write characteristics.
 
 
 
@@ -111,7 +104,31 @@ Subsubsection text here.
 % exclusively. Note that, LaTeX2e, unlike IEEE journals/conferences, places
 % footnotes above bottom floats. This can be corrected via the \fnbelowfloat
 % command of the stfloats package.
+\section{Algorithm}
 
+
+
+\begin{equation}
+  RSSI = -(10n \log_{10}d + A)
+\end{equation}
+
+where, n,d and A are signal propagation constant, distance from sender and received signal strength at 1 meter distance
+
+
+\section{Experimentation Setup}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.5]{position.png}  
+\caption{Experimental Setup}
+\label{fig1}
+
+
+\end{figure}
+
+\section{Result}
+
+\section{Analysis}
 
 
 \section{Conclusion}
