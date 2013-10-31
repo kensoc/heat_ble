@@ -65,13 +65,13 @@ public class DeviceScanActivity extends ListActivity {
     // TODO: initial values
     private static final String ADDRESS_0 = new String("C7:B9:5F:FC:29:82");
     private static final String ADDRESS_1 = new String("FA:30:A2:4F:E6:48");
-    private static final double N_0 = 0.830482;
-    private static final double N_1 = 0.498289;
-    private static final int A_0 = 85;
-    private static final int A_1 = 88;
+    private static final double N_0 = 2.657542;
+    private static final double N_1 = 1.660964;
+    private static final int A_0 = 82;
+    private static final int A_1 = 84;
     private static final PointF POS_0 = new PointF(0, 0);
-    private static final PointF POS_1 = new PointF(20, 0);
-    private static final RectF TARGET = new RectF(8, -5, 15, 5);
+    private static final PointF POS_1 = new PointF(10, 0);
+    private static final RectF TARGET = new RectF(2, -25, 8, 25);
 
     
     @Override
@@ -278,7 +278,7 @@ public class DeviceScanActivity extends ListActivity {
     	double dist_1 = getDistRSSI(N_1, A_1, mRssiDbMap.get(ADDRESS_1));
     	PointF p1 = new PointF();
     	PointF p2 = new PointF();
-    	int np = findPosition(POS_0, dist_0, POS_1, dist_1, p1, p2);
+    	int np = findPosition(POS_0, dist_0+2, POS_1, dist_1+2, p1, p2);
     	toast += "np:"+np;
     	boolean inTarget = false;
     	if (np > 0) {
@@ -295,7 +295,7 @@ public class DeviceScanActivity extends ListActivity {
     	}
     	toast += " d0:"+dist_0+" d1:"+dist_1;
     	String query_string = new String("");
-    	if (inTarget) {
+    	if (inTarget == true) {
     		toast += " IN";
     		query_string = "Z";
     	} else {
