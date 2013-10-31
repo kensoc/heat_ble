@@ -270,7 +270,7 @@ public class DeviceScanActivity extends ListActivity {
     	
     	String toast = new String("");
     	if (mRssiDbMap.get(ADDRESS_0) == null || mRssiDbMap.get(ADDRESS_1) == null) {
-    		toast = "NO ENOUGH DEVICES";
+    		toast = "NOT ENOUGH DEVICES";
     		Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
     		return;
     	}
