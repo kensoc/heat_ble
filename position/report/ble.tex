@@ -219,18 +219,29 @@ The same process is repeated for the other Arduino device to determine its A and
 
 \subsection{Operation}
 
-1) our App design: semi-automatic, click Scan, click Report ...
+The communication between phone and the Arduino nodes are done through TCP/IP network.
+Our Arduino boards are equipped with an Ethernet port.
+We used a home router with Wi-Fi capability to connect Arduino node and the phone in the same IP network.
 
-2) hardcoded parameters.
+The Android application is based on the official Bluetooth LE sample and operates in a semi-automatic fashion.
+Each time the user taps ``Scan´´ the application initiates a device scanning.
+Android Bluetooth LE API provides also RSSI values for each discovered device.
+Next, the user taps ``Report´´ and the application performs noise filtering, compute the intersections, and checks the target region predicate.
 
-3) Based on whether the phone is between the green lines, it sends LED switch commands through HTTP and Wi-Fi/Ethernet connections.
+If it is determined that the phone is within the target region the application sends one HTTP request to each of the Arduino node with ``Z´´ as the requested resource.
+Otherwise ``X´´ is the resource requested.
+The Arduino nodes turn the LED on or off according to the resource requested in incoming HTTP requests.
 
+Currently, all paramenters such as IP address, Arduino node position, playground geometry, and target region are hard-coded in the Andriod application and Arduino software.
 
 \section{Result}
 
-1) mention our precision in demo (the table)
+In the demo, our design achieved resonable precision until we are two meters from the boundary of the target region.
 
-2) multipath and other interference may be lower in the open space. this leads to better calibration and operation result.
+The playground is ten meters in length and the target region is bounded by the lines lying two meters away from each Arduino node.
+The demo was conducted in an comparably open space than our development laboratory.
+Multipath and other interferences may be lower, which leads to better calibration and operation result than we anticipated.
+
 
 \section{Analysis}
 
