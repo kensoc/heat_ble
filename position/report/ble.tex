@@ -110,7 +110,27 @@ reported as measured power, i.e.,
 
 \subsection{Ranging based on RSSI}
 
-The basic principle of RSSI based positioning techniques describes the relationship between the received signal strength, transmitted power of wireless signals and the distance among wireless devices. The theoretical relationship between RSSI and distance between two devices is the following: \cite{chung2007enhanced}
+
+ 
+
+The basic principle of RSSI based positioning techniques describes the relationship between the received signal strength, transmitted power of wireless signals and the distance among wireless devices.
+
+If $P_{r}$ is the received signal strength, $P_{t}$ is the transmitted power of wireless 
+signals, d is the distance between the transmitter and the receiver, n is the transmission factor whose values depend on the environment of propagation. \cite{xu2010distance}
+
+\begin{equation}
+  P_{r} = P_{t} \times (\frac{1}{d})^{n}
+ \label{eq1}
+\end{equation}
+
+The received $P_{r}$ power in dBm is then as follows:
+
+\begin{equation}
+  P_{r} =-10n \log_{10}d + A
+ \label{eq2}
+\end{equation}
+
+Therefore, the theoretical relationship between RSSI and distance between two devices is the following: \cite{chung2007enhanced}
 
 \begin{equation}
   RSSI = -(10n \log_{10}d + A)
@@ -118,6 +138,8 @@ The basic principle of RSSI based positioning techniques describes the relations
 \end{equation}
 
 where $n$,$d$, and $A$ are signal propagation constant, distance from sender, and received signal strength at $1$ meter distance, respectively.
+
+In equation~\ref{eqnbasicrssi}, we see that the values of parameter A and parameter n determine the relationship between the strength of received signals and the distance of signal transmission.
 
 \subsection{Noise filtering}
 
