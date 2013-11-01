@@ -108,8 +108,6 @@ However, a BLE enabled Android smartphone can discover other BLE enabled devices
 \subsection{Ranging based on RSSI}
 
 
- 
-
 The basic principle of RSSI based positioning techniques describes the relationship between the received signal strength, transmitted power of wireless signals and the distance among wireless devices.
 
 If $P_{r}$ is the received signal strength, $P_{t}$ is the transmitted power of wireless 
@@ -148,7 +146,7 @@ mRSSI = \sum_{i=0}^{6} RSSI_i * w_i
 \end{equation}
 
 $w_0$ is the current measured RSSI.
-Weigh coefficients are choosen heuristically:
+Weigh coefficients are chosen heuristically:
 
 \begin{equation}
 <w_i> = \{ 0.96, 0.02, 0.01, 0.005, 0.003, 0.001, 0.001 \}
@@ -165,18 +163,18 @@ Weigh coefficients are choosen heuristically:
 
 With two fixed points as the centres and distances to them as the radii we can draw two circles.
 The circle should intersect at one or two points.
-However, since there are interferences in the measured RSSI values and thus the radii it is also possible that the circles do not intersect.
+However, since there are interferences in the measured RSSI values and thus the radii, it is also possible that the circles do not intersect.
 The algorithm used to find intersections between two circles is a vector geometry based approach (Figure \ref{fig2})\cite{cshint}.
 
 We observed that undermeasurement occurs more frequently than overmeasurement in RSSI values.
 Therefore, we added 2 meters compensation to radii before calculating the intersections.
 
-The playground is considered a two dimentional surface.
+The playground is considered a two dimensional surface.
 One Arduino node is at (0,0) and the other is at (10,0).
-The target region is modeled as a rectangle.
+The target region is modelled as a rectangle.
 Its upper left corner is at $(x, -H)$ and its lower right corner is at $(10-y, H)$, where $H$ is at least the ``width´´ of the playground.
 The positive direction of axis in Java geometry library is lower right.
-We are in the target region if any of the intersection points falls within the trectangle.
+We are in the target region if any of the intersection points falls within the rectangle.
 
 \section{Experimentation Setup}
 
