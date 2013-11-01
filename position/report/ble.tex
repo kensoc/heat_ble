@@ -143,23 +143,43 @@ In equation~\ref{eqnbasicrssi}, we see that the values of parameter A and parame
 
 \subsection{Noise filtering}
 
-1) The magic filter.
+To mitigate the fluctuation in measured RSSI values, we take the weighted average among current and last few samples.
+Their current relationship is:
+
+\begin{equation}
+mRSSI = \sum_{i=0}^{6} RSSI_i * w_i
+\end{equation}
+
+$w_0$ is the current measured RSSI.
+Weigh coefficients are choosen heuristically:
+
+\begin{equation}
+<w_i> = \{ 0.96, 0.02, 0.01, 0.005, 0.003, 0.001, 0.001 \}
+\end{equation}
 
 \subsection{Positioning}
 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.7]{intr.eps}
-\caption{Circles intersections algorithm.\cite{cshint}}
+\caption{Circles intersection algorithm.\cite{cshint}}
 \label{fig2}
 \end{figure}
 
-1) the algorithm of finding intersections (Figure \ref{fig2})\cite{cshint}
+With two fixed points as the centres and distances to them as the radii we can draw two circles.
+The circle should intersect at one or two points.
+However, since there are interferences in the measured RSSI values and thus the radii it is also possible that the circles do not intersect.
+The algorithm used to find intersections between two circles is a vector geometry based approach (Figure \ref{fig2})\cite{cshint}.
 
-2) our hack of +2 meters
+We observed that undermeasurement occurs more frequently than overmeasurement in RSSI values.
+Therefore, we added 2 meters compensation to radii before calculating the intersections.
 
-3) check against target rectangle
-
+The playground is considered a two dimentional surface.
+One Arduino node is at (0,0) and the other is at (10,0).
+The target region is modeled as a rectangle.
+Its upper left corner is at $(x, -H)$ and its lower right corner is at $(10-y, H)$, where $H$ is at least the ``width´´ of the playground.
+The positive direction of axis in Java geometry library is lower right.
+We are in the target region if any of the intersection points falls within the trectangle.
 
 \section{Experimentation Setup}
 
