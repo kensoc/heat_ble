@@ -41,7 +41,7 @@
 
 
 % *** PDF, URL AND HYPERLINK PACKAGES ***
-%\usepackage{url}
+\usepackage{url}
 
 
 % *** Do not adjust lengths that control margins, column widths, etc. ***
@@ -251,20 +251,18 @@ During address discovery system, the presence of many other devices (that are no
 increases probability of getting accurate and precise RSSI samples. However, as we noticed that the signal strengths significantly varied, we planned to do a lot of calibration. Calibration itself was not sufficient enough to determine the precise distance. Therefore, the RSSI value can estimate distance that might be basic near or far result. 
 
 \section{Conclusion}
-The conclusion goes here.
 
-0) there is an red available from RedBearLab now, but we have finished already ...
+We find that this assignment is interesting and inspiring.
+However, the Bluetooth LE API of both Android and Arduino are underdocumented.
+The Bluetooth LE shield and built-in Ethernet module of our Arduino boards are sharing the SPI bus but with different parameters.
+It took us quite some time to sort all of them out.
+Since Android Bluetooth LE API only becomes available in the recent release, there was no official sample application from the manufacture of our Bluetooth LE shields for reference.
 
+Both our experiment results and previous works suggests that using Bluetooth LE signal strength for precise positioning is likely infeasible.
 
-% conference papers do not normally have an appendix
+Our implementation is available at: \url{https://github.com/zwuh/heat_ble/}.
 
-
-% use section* for acknowledgement
-
-
-
-% for the time begin, keep this \cite{} here so Makefile works.
-The authors would like to thank...\cite{IEEEhowto:IEEEtranpage}
+The authors would like to thank Vu Ba Tien Dung for his guidance throughout this project.
 
 
 
