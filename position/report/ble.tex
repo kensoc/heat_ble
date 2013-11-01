@@ -108,20 +108,36 @@ reported as measured power, i.e.,
 % command of the stfloats package.
 \section{Mechanisms}
 
+\subsection{Ranging based on RSSI}
+
 The basic principle of RSSI based positioning techniques describes the relationship between the received signal strength, transmitted power of wireless signals and the distance among wireless devices. The theoretical relationship between RSSI and distance between two devices is the following: \cite{chung2007enhanced}
+
 \begin{equation}
   RSSI = -(10n \log_{10}d + A)
+ \label{eqnbasicrssi}
 \end{equation}
 
-where, n,d and A are signal propagation constant, distance from sender and received signal strength at 1 meter distance. \\
+where $n$,$d$, and $A$ are signal propagation constant, distance from sender, and received signal strength at $1$ meter distance, respectively.
 
-If d=1, then A=RSSI. For other distances (e.g., d=4) we can get the value of n from measured A and RSSI values from the following equation:
+\subsection{Noise filtering}
 
-\begin{equation}
- n = -(\frac{ meanRSSI-A}{10 \log_{10}d})
-\end{equation}
+1) The magic filter.
 
-Here, meanRSSI is the mean of 10 samples of RSSI values obtained from device scan discovery mechanism of Android phone.
+\subsection{Positioning}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{intr.eps}
+\caption{Circles intersections algorithm.\cite{cshint}}
+\label{fig2}
+\end{figure}
+
+1) the algorithm of finding intersections (Figure \ref{fig2})\cite{cshint}
+
+2) our hack of +2 meters
+
+3) check against target rectangle
+
 
 \section{Experimentation Setup}
 
@@ -135,18 +151,6 @@ Bluetooth Low Energy Shield has been used to interface Arduino with Android devi
 
 \subsection{Environment Setup}
 
-The system ~\ref{fig1} consists of two Arduino nodes located at two fixed positions and continuously scanning for Bluetooth LE (BLE) devices in the home area. These two stationary nodes calculate the distance between them and the other Bluetooth LE devices. When the phone moves to the green marks, it send indication to Arduino devices to light on using http request.
-
-
-
-
-
-\subsection{Calibration}
-
-First, we place one Arduino device 1m distant from Android phone, scan 10 times and store RSSI samples. We take the mean of these RSSI samples and calculate A. Then we place the phone 4m away from the Arduino device, measure the value of n. The same process is repeated for the other Arduino device to determine A and n for that.
-
-
-
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.5]{position.eps}
@@ -154,22 +158,34 @@ First, we place one Arduino device 1m distant from Android phone, scan 10 times 
 \label{fig1}
 \end{figure}
 
-\subsection{Distance Calculation}
+The system (Figure \ref{fig1}) consists of two Arduino nodes located at two fixed positions and continuously scanning for Bluetooth LE (BLE) devices in the home area. These two stationary nodes calculate the distance between them and the other Bluetooth LE devices. When the phone moves to the green marks, it send indication to Arduino devices to light on using http request.
 
-To estimate the position of the blind node, at least three reference nodes in the network must be
 
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=0.7]{intr.eps}
-\caption{Two possible position that may be in Marked region}
-\label{fig2}
-\end{figure}
+\subsection{Calibration}
+
+First, we place one Arduino device at 1 meter distance from Android phone, scan 10 times and store RSSI samples.
+We take the mean of these RSSI samples and calculate A.
+
+\begin{equation}
+ A = -meanRSSI_{at 1m}
+\end{equation}
+
+
+Then we move the phone to 2 meters away from the Arduino device and compute the value of n.
+The same process is repeated for the other Arduino device to determine its A and n values.
+
+\begin{equation}
+ n = -(\frac{ meanRSSI_{at 2m}-A}{10 \log_{10}d})
+\end{equation}
+
 
 \section{Result}
 
+1) test result here
+
 \section{Analysis}
 
-This work was based on bluetooth positioning. After experimentation, we can conclude that it is not quite as easy as detecting the signal strength. Accurate and precise results depend on many factors, even what kind of phone we used in our experiment, the environment and how it might effect the signal strength, and also obstacles that may interfere with the signal, such as people, walls, tables. Additionally, phone orientation at a particular place experienced different RSSI values.
+This work was based on Bluetooth positioning. After experimentation, we can conclude that it is not quite as easy as detecting the signal strength. Accurate and precise results depend on many factors, even what kind of phone we used in our experiment, the environment and how it might effect the signal strength, and also obstacles that may interfere with the signal, such as people, walls, tables. Additionally, phone orientation at a particular place experienced different RSSI values.
 
 During address discovery system, the presence of many other devices (that are not part of the system) might 
 increases probability of getting accurate and precise RSSI samples. However, as we noticed that the signal strengths significantly varied, we planned to do a lot of calibration. Calibration itself was not sufficient enough to determine the precise distance. Therefore, the RSSI value can estimate distance that might be basic near or far result. 
