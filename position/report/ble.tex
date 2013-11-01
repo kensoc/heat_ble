@@ -77,7 +77,9 @@ zhen-huan.hwang and hasan.islam @aalto.fi}}
 
 \begin{abstract}
 
-Arduino is an open-source physical computing platform based on a simple i/o board and a development environment that implements the Processing/Wiring language. In this article, we will present a prototype of indoor positioning system using Arduino device and BLE shield which is designed to work with Arduino boards, including Arduino Uno, Mega 2560, Leonardo and Due. It allows us to connect Arduino board with other BLE Central device like a smartphone or tablet. 
+Arduino is an open-source physical computing platform based on a simple I/O board and a development environment that implements the Processing/Wiring language.
+In this article, we will present a prototype of indoor positioning system using Arduino device with Bluetooth LE shield and an Android phone.
+The results suggests that precise positioning is highly unlikely.
 
 \end{abstract}
 % IEEEtran.cls defaults to using nonbold math in the Abstract.
@@ -93,9 +95,18 @@ Arduino is an open-source physical computing platform based on a simple i/o boar
 
 \section{Introduction}
 % no \IEEEPARstart
-Arduino is an open-source physical computing platform based on a simple microcontroller board, and a development environment for writing software for microcontroller. Arduino can be used to develop interactive objects to control variety of sensors, lights, motors. BLE Shield stands for Bluetooth Low Energy (BLE) Shield \cite{ble} that is designed to work with Arduino boards, including Arduino Uno, Mega 2560, Leonardo and Due. It allows us to connect Arduino board with other BLE enabled devices like a smartphone or tablet. Android 4.3 (API Level 18) introduces built-in platform support for Bluetooth Low Energy in the central role and provides APIs to discover devices, query for services, and read/write characteristics.
+Arduino is an open-source physical computing platform based on a simple micro controller board, and a development environment for writing software for micro controller.
+Arduino can be used to develop interactive objects to control variety of sensors, lights, motors. BLE Shield stands for Bluetooth Low Energy (BLE) Shield \cite{ble} that is designed to work with Arduino boards.
+It allows us to connect Arduino board with other BLE enabled devices like a smart phone or tablet.
+Android 4.3 (API Level 18) introduces built-in platform support for Bluetooth Low Energy in the central role and provides APIs to discover devices, query for services, and read/write access to characteristics.
 
-However, a BLE enabled Android smartphone can discover other BLE enabled devices within range. Android BLE API support getting Received Signal Strength Indicator (RSSI). RSSI is defined as measured voltage by a receiver’s RSSI circuit. It is the squared magnitude of the signal strength. There are quite a number of RSSI-based localization techniques like triangulation and fingerprinting. None of them are precise in estimation. RSSI values itself affected by many factors like obstacles, multipath fading, antenna polarization and cross-body shielding.
+A BLE enabled Android smart phone is able to discover other BLE enabled devices within range.
+Android BLE API support getting Received Signal Strength Indicator (RSSI).
+RSSI is defined as measured voltage by a receiver’s RSSI circuit.
+It is the squared magnitude of the signal strength.
+There are quite a number of RSSI-based localisation techniques like triangulation and fingerprinting.
+None of them are precise in estimation.
+RSSI values itself affected by many factors like obstacles, multipath fading, antenna polarisation and cross-body shielding.
  
 % Note that IEEE does not put floats in the very first column - or typically
 % anywhere on the first page for that matter. Also, in-text middle ("here")
@@ -163,10 +174,10 @@ Weigh coefficients are chosen heuristically:
 
 With two fixed points as the centres and distances to them as the radii we can draw two circles.
 The circle should intersect at one or two points.
-However, since there are interferences in the measured RSSI values and thus the radii, it is also possible that the circles do not intersect.
+However, since there is interference in the measured RSSI values and thus the radii, it is also possible that the circles do not intersect.
 The algorithm used to find intersections between two circles is a vector geometry based approach (Figure \ref{fig2})\cite{cshint}.
 
-We observed that undermeasurement occurs more frequently than overmeasurement in RSSI values.
+We observed that under measurement occurs more frequently than over measurement in RSSI values.
 Therefore, we added 2 meters compensation to radii before calculating the intersections.
 
 The playground is considered a two dimensional surface.
@@ -180,7 +191,7 @@ We are in the target region if any of the intersection points falls within the r
 
 \subsection{Implementation on Android Phone}
 
-Using LG nexus 4 phones and Android development tools, we developed test applications that continuously scan for BLE devices using Android 4.3 BLE API. The GATT profile is a general specification for sending and receiving short pieces of data known as "attributes" over a BLE link. All current Low Energy application profiles are based on GATT. GATT is built on top of the Attribute Protocol (ATT). This is also referred to as GATT/ATT. ATT is optimized to run on BLE devices. Each attribute is uniquely identified by 128-bit format a Universally Unique Identifier (UUID). The attributes transported by ATT are formatted as characteristics and services.
+Using LG nexus 4 phones and Android development tools, we developed test applications that continuously scan for BLE devices using Android 4.3 BLE API. The GATT profile is a general specification for sending and receiving short pieces of data known as "attributes" over a BLE link. All current Low Energy application profiles are based on GATT. GATT is built on top of the Attribute Protocol (ATT). This is also referred to as GATT/ATT. ATT is optimised to run on BLE devices. Each attribute is uniquely identified by 128-bit format a Universally Unique Identifier (UUID). The attributes transported by ATT are formatted as characteristics and services.
 
 \subsection{Arduino with BLE shield}
 
@@ -232,15 +243,15 @@ If it is determined that the phone is within the target region the application s
 Otherwise ``X´´ is the resource requested.
 The Arduino nodes turn the LED on or off according to the resource requested in incoming HTTP requests.
 
-Currently, all paramenters such as IP address, Arduino node position, playground geometry, and target region are hard-coded in the Andriod application and Arduino software.
+Currently, all parameters such as IP address, Arduino node position, playground geometry, and target region are hard-coded in the Andriod application and Arduino software.
 
 \section{Result}
 
-In the demo, our design achieved resonable precision until we are two meters from the boundary of the target region.
+In the demo, our design achieved reasonable precision until we are two meters from the boundary of the target region.
 
 The playground is ten meters in length and the target region is bounded by the lines lying two meters away from each Arduino node.
 The demo was conducted in an comparably open space than our development laboratory.
-Multipath and other interferences may be lower, which leads to better calibration and operation result than we anticipated.
+Multipath and other interference may be lower, which leads to better calibration and operation result than we anticipated.
 
 
 \section{Analysis}
@@ -253,12 +264,12 @@ increases probability of getting accurate and precise RSSI samples. However, as 
 \section{Conclusion}
 
 We find that this assignment is interesting and inspiring.
-However, the Bluetooth LE API of both Android and Arduino are underdocumented.
+However, the Bluetooth LE API of both Android and Arduino are under documented.
 The Bluetooth LE shield and built-in Ethernet module of our Arduino boards are sharing the SPI bus but with different parameters.
 It took us quite some time to sort all of them out.
 Since Android Bluetooth LE API only becomes available in the recent release, there was no official sample application from the manufacture of our Bluetooth LE shields for reference.
 
-Both our experiment results and previous works suggests that using Bluetooth LE signal strength for precise positioning is likely infeasible.
+Both our experiment results and previous works suggests that using Bluetooth LE signal strength for precise positioning is likely unfeasible.
 
 Our implementation is available at: \url{https://github.com/zwuh/heat_ble/}.
 
