@@ -93,13 +93,10 @@ Arduino is an open-source physical computing platform based on a simple i/o boar
 
 ard\section{Introduction}
 % no \IEEEPARstart
-Arduino is an open-source physical computing platform based on a simple microcontroller board, and a development environment for writing software for microcontroller. Arduino can be used to develop stand-alone interactive objects or can be connected to software on your computer (e.g. Flash, Processing, MaxMSP). BLE Shield stands for Bluetooth Low Energy (BLE) Shield \cite{ble} that is designed to work with Arduino boards, including Arduino Uno, Mega 2560, Leonardo and Due. It allows us to connect Arduino board with other BLE Central device like a smartphone or tablet. Android 4.3 (API Level 18) introduces built-in platform support for Bluetooth Low Energy in the central role and provides APIs to discover devices, query for services, and read/write characteristics.
+Arduino is an open-source physical computing platform based on a simple microcontroller board, and a development environment for writing software for microcontroller. Arduino can be used to develop interactive objects to control variety of sensors, lights, motors. BLE Shield stands for Bluetooth Low Energy (BLE) Shield \cite{ble} that is designed to work with Arduino boards, including Arduino Uno, Mega 2560, Leonardo and Due. It allows us to connect Arduino board with other BLE enabled devices like a smartphone or tablet. Android 4.3 (API Level 18) introduces built-in platform support for Bluetooth Low Energy in the central role and provides APIs to discover devices, query for services, and read/write characteristics.
 
 However, a BLE enabled Android smartphone can discover other BLE enabled devices within range. Android BLE API support getting Received Signal Strength Indicator (RSSI). RSSI is defined as measured voltage by a receiver’s RSSI circuit. It is the squared magnitude of the signal strength. There are quite a number of RSSI-based localization techniques like triangulation and fingerprinting. None of them are precise in estimation. RSSI values itself affected by many factors like obstacles, multipath fading, antenna polarization and cross-body shielding.
-
-
- Often, it is equivalently 
-reported as measured power, i.e., 
+ 
 % Note that IEEE does not put floats in the very first column - or typically
 % anywhere on the first page for that matter. Also, in-text middle ("here")
 % positioning is not used. Most IEEE journals/conferences use top floats
