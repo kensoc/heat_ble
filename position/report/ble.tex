@@ -149,7 +149,7 @@ Using LG nexus 4 phones and Android development tools, we developed test applica
 
 Bluetooth Low Energy Shield has been used to interface Arduino with Android device. It works with all Arduino boards, including Arduino Uno, Mega 2560, Leonardo, and Due. 
 
-\subsection{Environment Setup}
+\subsection{Scenario}
 
 \begin{figure}[h!]
 \centering
@@ -158,7 +158,9 @@ Bluetooth Low Energy Shield has been used to interface Arduino with Android devi
 \label{fig1}
 \end{figure}
 
-The system (Figure \ref{fig1}) consists of two Arduino nodes located at two fixed positions and continuously scanning for Bluetooth LE (BLE) devices in the home area. These two stationary nodes calculate the distance between them and the other Bluetooth LE devices. When the phone moves to the green marks, it send indication to Arduino devices to light on using http request.
+The system (Figure \ref{fig1}) consists of two Arduino nodes located at two fixed positions and continuously scanning for Bluetooth LE (BLE) devices in the home area. These two stationary nodes calculate the distance between them and the other Bluetooth LE devices.
+When the phone enters the region between green marks it signals the Arduino nodes to light up their LED.
+When it leaves the region it signals the Arduino nodes to turn off their LED.
 
 
 \subsection{Calibration}
@@ -170,7 +172,6 @@ We take the mean of these RSSI samples and calculate A.
  A = -meanRSSI_{at 1m}
 \end{equation}
 
-
 Then we move the phone to 2 meters away from the Arduino device and compute the value of n.
 The same process is repeated for the other Arduino device to determine its A and n values.
 
@@ -179,9 +180,20 @@ The same process is repeated for the other Arduino device to determine its A and
 \end{equation}
 
 
+\subsection{Operation}
+
+1) our App design: semi-automatic, click Scan, click Report ...
+
+2) hardcoded parameters.
+
+3) Based on whether the phone is between the green lines, it sends LED switch commands through HTTP and Wi-Fi/Ethernet connections.
+
+
 \section{Result}
 
-1) test result here
+1) mention our precision in demo (the table)
+
+2) multipath and other interference may be lower in the open space. this leads to better calibration and operation result.
 
 \section{Analysis}
 
@@ -193,6 +205,7 @@ increases probability of getting accurate and precise RSSI samples. However, as 
 \section{Conclusion}
 The conclusion goes here.
 
+0) there is an Android sample App available from RedBearLab now, but we have finished already ...
 
 
 % conference papers do not normally have an appendix
