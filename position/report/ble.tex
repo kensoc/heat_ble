@@ -183,7 +183,7 @@ Therefore, we added 2 meters compensation to radii before calculating the inters
 The playground is considered a two dimensional surface.
 One Arduino node is at (0,0) and the other is at (10,0).
 The target region is modelled as a rectangle.
-Its upper left corner is at $(x, -H)$ and its lower right corner is at $(10-y, H)$, where $H$ is at least the ``width´´ of the playground.
+Its upper left corner is at $(x, -H)$ and its lower right corner is at $(10-y, H)$, where $H$ is at least the ``width'' of the playground.
 The positive direction of axis in Java geometry library is lower right.
 We are in the target region if any of the intersection points falls within the rectangle.
 
@@ -235,12 +235,12 @@ Our Arduino boards are equipped with an Ethernet port.
 We used a home router with Wi-Fi capability to connect Arduino node and the phone in the same IP network.
 
 The Android application is based on the official Bluetooth LE sample and operates in a semi-automatic fashion.
-Each time the user taps ``Scan´´ the application initiates a device scanning.
+Each time the user taps ``Scan'' the application initiates a device scanning.
 Android Bluetooth LE API provides also RSSI values for each discovered device.
-Next, the user taps ``Report´´ and the application performs noise filtering, compute the intersections, and checks the target region predicate.
+Next, the user taps ``Report'' and the application performs noise filtering, compute the intersections, and checks the target region predicate.
 
-If it is determined that the phone is within the target region the application sends one HTTP request to each of the Arduino node with ``Z´´ as the requested resource.
-Otherwise ``X´´ is the resource requested.
+If it is determined that the phone is within the target region the application sends one HTTP request to each of the Arduino node with ``Z'' as the requested resource.
+Otherwise ``X'' is the resource requested.
 The Arduino nodes turn the LED on or off according to the resource requested in incoming HTTP requests.
 
 Currently, all parameters such as IP address, Arduino node position, playground geometry, and target region are hard-coded in the Andriod application and Arduino software.
