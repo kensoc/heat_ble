@@ -7,15 +7,18 @@
 
   <!-- Routers -->
   <Router name="rHelsinki" RFC1583Compatible="true">
-   <PointToPointInterface ifName="ppp0" areaID="0.0.0.0" interfaceOutputCost="1" />
-   <PointToPointInterface ifName="ppp1" areaID="0.0.0.0" interfaceOutputCost="1" />
-   <PointToPointInterface ifName="ppp2" areaID="0.0.0.0" interfaceOutputCost="1" />
+   <BroadcastInterface ifName="eth0" areaID="0.0.0.0" interfaceOutputCost="1" />
+   <PointToPointInterface ifName="ppp0" areaID="0.0.0.0" interfaceOutputCost="2" />
+   <PointToPointInterface ifName="ppp1" areaID="0.0.0.0" interfaceOutputCost="2" />
+   <PointToPointInterface ifName="ppp2" areaID="0.0.0.0" interfaceOutputCost="2" />
   </Router>
 
   <Router name="rTurku" RFC1583Compatible="true">
-   <PointToPointInterface ifName="ppp0" areaID="0.0.0.0" interfaceOutputCost="1" />
-   <PointToPointInterface ifName="ppp1" areaID="0.0.0.0" interfaceOutputCost="1" />
-   <PointToPointInterface ifName="ppp2" areaID="0.0.0.0" interfaceOutputCost="1" />
+   <BroadcastInterface ifName="eth0" areaID="0.0.0.0" interfaceOutputCost="1" />
+   <BroadcastInterface ifName="eth1" areaID="0.0.0.0" interfaceOutputCost="1" />
+   <PointToPointInterface ifName="ppp0" areaID="0.0.0.0" interfaceOutputCost="2" />
+   <PointToPointInterface ifName="ppp1" areaID="0.0.0.0" interfaceOutputCost="2" />
+   <PointToPointInterface ifName="ppp2" areaID="0.0.0.0" interfaceOutputCost="2" />
   </Router>
   
   <Router name="rTampere" RFC1583Compatible="true">
@@ -26,19 +29,24 @@
   </Router>
   
   <Router name="rLappeenranta" RFC1583Compatible="true">
-   <PointToPointInterface ifName="ppp0" areaID="0.0.0.0" interfaceOutputCost="1" />
-   <PointToPointInterface ifName="ppp1" areaID="0.0.0.0" interfaceOutputCost="1" />
-   <PointToPointInterface ifName="ppp2" areaID="0.0.0.0" interfaceOutputCost="1" />
+   <BroadcastInterface ifName="eth0" areaID="0.0.0.0" interfaceOutputCost="1" />
+   <BroadcastInterface ifName="eth1" areaID="0.0.0.0" interfaceOutputCost="1" />
+   <PointToPointInterface ifName="ppp0" areaID="0.0.0.0" interfaceOutputCost="2" />
+   <PointToPointInterface ifName="ppp1" areaID="0.0.0.0" interfaceOutputCost="2" />
+   <PointToPointInterface ifName="ppp2" areaID="0.0.0.0" interfaceOutputCost="2" />
   </Router>
   
   <Router name="rVaasa" RFC1583Compatible="true">
-   <PointToPointInterface ifName="ppp0" areaID="0.0.0.0" interfaceOutputCost="1" />
-   <PointToPointInterface ifName="ppp1" areaID="0.0.0.0" interfaceOutputCost="1" />
+   <BroadcastInterface ifName="eth0" areaID="0.0.0.0" interfaceOutputCost="1" />
+   <BroadcastInterface ifName="eth1" areaID="0.0.0.0" interfaceOutputCost="1" />
+   <PointToPointInterface ifName="ppp0" areaID="0.0.0.0" interfaceOutputCost="2" />
+   <PointToPointInterface ifName="ppp1" areaID="0.0.0.0" interfaceOutputCost="2" />
   </Router>
   
   <Router name="rOulu" RFC1583Compatible="true">
-   <PointToPointInterface ifName="ppp0" areaID="0.0.0.0" interfaceOutputCost="1" />
-   <PointToPointInterface ifName="ppp1" areaID="0.0.0.0" interfaceOutputCost="1" />
+   <BroadcastInterface ifName="eth0" areaID="0.0.0.0" interfaceOutputCost="1" />
+   <PointToPointInterface ifName="ppp0" areaID="0.0.0.0" interfaceOutputCost="2" />
+   <PointToPointInterface ifName="ppp1" areaID="0.0.0.0" interfaceOutputCost="2" />
   </Router>
   
   <Router name="rGateway" RFC1583Compatible="true">
