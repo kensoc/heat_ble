@@ -37,32 +37,41 @@ network OurSuomi
             @display("p=524,382");
             gates:
                 ethg[1];
+                pppg[3];
         }
         rTurku: OSPFRouter {
             @display("p=304,382");
             gates:
                 ethg[2];
+                pppg[3];
         }
         rTampere: OSPFRouter {
             @display("p=410,250");
+            gates:
+                pppg[4];
         }
         rLappeenranta: OSPFRouter {
             @display("p=588,256");
             gates:
                 ethg[2];
+                pppg[3];
         }
         rVaasa: OSPFRouter {
             @display("p=304,134");
             gates:
                 ethg[2];
+                pppg[2];
         }
         rOulu: OSPFRouter {
             @display("p=472,103");
             gates:
                 ethg[1];
+                pppg[2];
         }
         rGateway: OSPFRouter {
             @display("p=222,413");
+            gates:
+                pppg[1];
         }
         sLANHelsinki: EtherSwitch {
             @display("p=573,431");
@@ -116,20 +125,18 @@ network OurSuomi
         }
         configurator: IPv4NetworkConfigurator {
             parameters:
-                addStaticRoutes = false;
-                addDefaultRoutes = false;
                 @display("p=75,43");
         }
     connections:
-        rHelsinki.pppg++ <--> CoreFibre <--> rTurku.pppg++;
-        rHelsinki.pppg++ <--> CoreFibre <--> rLappeenranta.pppg++;
-        rHelsinki.pppg++ <--> CoreFibre <--> rTampere.pppg++;
-        rTurku.pppg++ <--> CoreFibre <--> rTampere.pppg++;
-        rTurku.pppg++ <--> CoreFibre <--> rGateway.pppg++;
-        rTampere.pppg++ <--> CoreFibre <--> rLappeenranta.pppg++;
-        rTampere.pppg++ <--> CoreFibre <--> rVaasa.pppg++;
-        rLappeenranta.pppg++ <--> CoreFibre <--> rOulu.pppg++;
-        rVaasa.pppg++ <--> CoreFibre <--> rOulu.pppg++;
+        rHelsinki.pppg[0] <--> CoreFibre <--> rTurku.pppg[0];
+        rHelsinki.pppg[2] <--> CoreFibre <--> rLappeenranta.pppg[2];
+        rHelsinki.pppg[1] <--> CoreFibre <--> rTampere.pppg[1];
+        rTurku.pppg[1] <--> CoreFibre <--> rTampere.pppg[0];
+        rTurku.pppg[2] <--> CoreFibre <--> rGateway.pppg[0];
+        rTampere.pppg[2] <--> CoreFibre <--> rLappeenranta.pppg[0];
+        rTampere.pppg[3] <--> CoreFibre <--> rVaasa.pppg[1];
+        rLappeenranta.pppg[1] <--> CoreFibre <--> rOulu.pppg[1];
+        rVaasa.pppg[0] <--> CoreFibre <--> rOulu.pppg[0];
         sLANHelsinki.ethg[0] <--> LANTx <--> rHelsinki.ethg[0];
         sLANTurku.ethg[0] <--> LANTx <--> rTurku.ethg[1];
         sCDNTurku.ethg[0] <--> CDNTx <--> rTurku.ethg[0];
