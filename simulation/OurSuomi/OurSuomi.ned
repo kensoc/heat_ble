@@ -8,7 +8,7 @@ import inet.util.ThruputMeteringChannel;
 import inet.world.scenario.ScenarioManager;
 
 
-network mySuomi
+network OurSuomi
 {
     parameters:
         @display("p=10,10;b=712,152");
