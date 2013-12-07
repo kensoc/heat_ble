@@ -2,27 +2,46 @@
 <OSPFASConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="OSPF.xsd">
   <!-- Areas -->
   <Area id="0.0.0.0">
+   <AddressRange address="192.173.0.0" mask="255.255.255.0" status="Advertise" />
   </Area>
 
   <!-- Routers -->
   <Router name="rHelsinki" RFC1583Compatible="true">
+   <PointToPointInterface ifName="ppp0" areaID="0.0.0.0" interfaceOutputCost="1" />
+   <PointToPointInterface ifName="ppp1" areaID="0.0.0.0" interfaceOutputCost="1" />
+   <PointToPointInterface ifName="ppp2" areaID="0.0.0.0" interfaceOutputCost="1" />
   </Router>
 
   <Router name="rTurku" RFC1583Compatible="true">
+   <PointToPointInterface ifName="ppp0" areaID="0.0.0.0" interfaceOutputCost="1" />
+   <PointToPointInterface ifName="ppp1" areaID="0.0.0.0" interfaceOutputCost="1" />
+   <PointToPointInterface ifName="ppp2" areaID="0.0.0.0" interfaceOutputCost="1" />
   </Router>
   
   <Router name="rTampere" RFC1583Compatible="true">
+   <PointToPointInterface ifName="ppp0" areaID="0.0.0.0" interfaceOutputCost="1" />
+   <PointToPointInterface ifName="ppp1" areaID="0.0.0.0" interfaceOutputCost="1" />
+   <PointToPointInterface ifName="ppp2" areaID="0.0.0.0" interfaceOutputCost="1" />
+   <PointToPointInterface ifName="ppp3" areaID="0.0.0.0" interfaceOutputCost="1" />
   </Router>
   
   <Router name="rLappeenranta" RFC1583Compatible="true">
+   <PointToPointInterface ifName="ppp0" areaID="0.0.0.0" interfaceOutputCost="1" />
+   <PointToPointInterface ifName="ppp1" areaID="0.0.0.0" interfaceOutputCost="1" />
+   <PointToPointInterface ifName="ppp2" areaID="0.0.0.0" interfaceOutputCost="1" />
   </Router>
   
   <Router name="rVaasa" RFC1583Compatible="true">
+   <PointToPointInterface ifName="ppp0" areaID="0.0.0.0" interfaceOutputCost="1" />
+   <PointToPointInterface ifName="ppp1" areaID="0.0.0.0" interfaceOutputCost="1" />
   </Router>
   
   <Router name="rOulu" RFC1583Compatible="true">
+   <PointToPointInterface ifName="ppp0" areaID="0.0.0.0" interfaceOutputCost="1" />
+   <PointToPointInterface ifName="ppp1" areaID="0.0.0.0" interfaceOutputCost="1" />
   </Router>
   
   <Router name="rGateway" RFC1583Compatible="true">
+   <PointToPointInterface ifName="ppp0" areaID="0.0.0.0" interfaceOutputCost="1" />
   </Router>
 </OSPFASConfig>
