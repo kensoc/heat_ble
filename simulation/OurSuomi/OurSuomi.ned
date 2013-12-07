@@ -124,8 +124,13 @@ network OurSuomi
                 ethg[1];
         }
         configurator: IPv4NetworkConfigurator {
-            parameters:
-                @display("p=75,43");
+            @display("p=69,43");
+        }
+        scenarioManager: ScenarioManager {
+            @display("p=69,161");
+        }
+        lifecycleController: LifecycleController {
+            @display("p=69,103");
         }
     connections:
         rHelsinki.pppg[0] <--> CoreFibre <--> rTurku.pppg[0];
