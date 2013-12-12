@@ -1,0 +1,202 @@
+\documentclass[conference,a4paper]{IEEEtran}
+
+% *** GRAPHICS RELATED PACKAGES ***
+\ifCLASSINFOpdf
+  \usepackage[pdftex]{graphicx}
+  \usepackage{epstopdf}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../pdf/}{../jpeg/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
+  % will default to the driver specified in the system graphics.cfg if no
+  % driver is specified.
+  \usepackage[dvips]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../eps/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.eps}
+\fi
+
+
+% *** MATH PACKAGES ***
+\usepackage[cmex10]{amsmath}
+
+
+% *** SPECIALIZED LIST PACKAGES ***
+%\usepackage{algorithmic}
+
+
+% *** ALIGNMENT PACKAGES ***
+%\usepackage{array}
+
+
+% *** SUBFIGURE PACKAGES ***
+%\usepackage[tight,footnotesize]{subfigure}
+%\usepackage[caption=false]{caption}
+%\usepackage[font=footnotesize]{subfig}
+
+
+% *** PDF, URL AND HYPERLINK PACKAGES ***
+\usepackage{url}
+
+
+% *** Do not adjust lengths that control margins, column widths, etc. ***
+% *** Do not use packages that alter fonts (such as pslatex).         ***
+% There should be no need to do such things with IEEEtran.cls V1.6 and later.
+% (Unless specifically asked to do so by the journal or conference you plan
+% to submit to, of course. )
+
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+%
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{Simulation Tools}
+
+
+% author names and affiliations
+% use a multiple column layout for up to three different
+% affiliations
+\author{
+\IEEEauthorblockN{Zhen-Huan Hwang and Hasan Mahmood Aminul Islam}
+\IEEEauthorblockA{Aalto University, Espoo, Finland\\
+zhen-huan.hwang and hasan.islam @aalto.fi}}
+
+
+% make the title area
+\maketitle
+
+
+\begin{abstract}
+
+In this assignment, we use omnet++ simulation tool to investigate the TCP congestion control algorithms. The objective of this assignment is to familiarize with omnet++, modifying TCP stack at host level and running TCP congestion control algorithms. Finally we provide analysis from the trace we found from omnet++ tool.
+
+\end{abstract}
+% IEEEtran.cls defaults to using nonbold math in the Abstract.
+% This preserves the distinction between vectors and scalars. However,
+% if the conference you are submitting to favors bold math in the abstract,
+% then you can use LaTeX's standard command \boldmath at the very start
+% of the abstract to achieve this. Many IEEE journals/conferences frown on
+% math in the abstract anyway.
+
+% no keywords
+
+
+
+\section{Introduction}
+% no \IEEEPARstart
+TCP \cite{tcp} is a connection-oriented, reliable standard transport protocol. TCP is able to recover data that is damaged, lost, duplicated, or delivered out of order through Internet. TCP sender uses sequence numbers and acknowledgements from a receiver to recover for flow control and error control.
+
+TCP provides flow and congestion control mechanisms through the use of congestion window. TCP starts a retransmission timer when an downstream segment is passed down to IP. If there is no acknowledgement from the receiver for the data in a given segment before the timer expires, then the segment is retransmitted. If the network is congested, the sender increases the window size by a fixed number every RTT. In response to congestion detection, the sender decreases the transmission rate by a multiplicative factor, for instance, the congestion window is decreased by half. This algorithm is known as Additive increase, multiplicative decrease (AIMD) of the sending rate. The acknowledgement (ACK) number from receiver determines a range of acceptable sequence numbers beyond the last segment successfully received. 
+
+
+TCP Reno is a variant of basic TCP congestion protocol. It applies four congestion control mechanisms: slow-start, congestion avoidance, fast retransmit and fast recovery. Slow-start and congestion avoidance algorithms are utilized to control the amount of outstanding data being pushed into the network. TCP sender uses congestion window to limit the amount of data in sender side to be injected into the network before receiving an acknowledgement (ACK). Flow control is achieved through receiver's advertised window (\texttt{rwnd}) on the amount of outstanding data. Another state variable, the slow start threshold (\texttt{ssthresh}), defines the margin to promote the sender switching from the slow-start to congestion avoidance algorithm.
+
+At the beginning of transmission into a network with unknown conditions, TCP applies slow-start algorithm to determine the available capacity of the network instead of injecting large burst of data congesting the network. This algorithm is also used after loss recovery by the retransmission timer. A non standard, experimental TCP extension states that the initial value of \texttt{cwnd} can be defined as the following equation \cite{allman1998increasing}:
+
+\begin{equation}
+   cwnd = min (4\times SMSS, max (2 \times SMSS, 4380 bytes))
+  \label{eqn1}
+\end{equation}
+
+where sender maximum segment size (SMSS) is the size of the largest segment that the sender can transmit. This value can be based on the maximum transmission unit of the network, largest segment the receiver is willing to accept or other factors. The initial value of \texttt{ssthresh} is set arbitrarily high and reduced upon congestion detection. 
+
+
+
+Congestion avoidance algorithm allows the sender to increase the \texttt{cwnd} by SMSS per RTT. The value of \texttt{ssthresh} is adjusted while detecting segment loss using retransmission timer and the given segment has not yet been resent by way of the retransmission timer, the value is set by Equation~\ref{eqnn}.
+
+\begin{equation}
+  ssthresh = max (FlightSize  / 2, 2 \times SMSS)
+  \label{eqnn}
+\end{equation}
+
+where, \texttt{FlightSize} is the amount of outstanding data in the network. 
+
+
+When TCP receiver detects arrival of an out of order segment, it immediately sends duplicate ACK to TCP sender that includes the expected sequence number. This ACK is a duplicate of an ACK which was sent previously. From the sender's point of view, a duplicate ACK can be caused by a lost segment or just a reordering of segments. When incoming data segments fill in all or part of a gap in the sequence space, TCP receiver immediately sends an ACK.
+
+
+Fast Retransmit algorithm is used to detect and repair losses based on incoming duplicate ACKs. Fast Retransmit and Fast Recovery of TCP Reno is used together. The arrival of 3 duplicate ACKs determine the lost of a segment and TCP starts retransmitting a missing segment without waiting for the retransmission timer. The \texttt{cwnd} is set to \texttt{ssthresh} plus 3*SMSS. Therefore, Fast Recovery takes place to promote the transmission of new data until a non-duplicate ACK arrives. 
+
+Generally, TCP Reno \cite{tcpreno} is not able to recover multiple losses of packets in a single flight. In TCP Reno, Fast Recovery exits upon the reception of new ACK. TCP NewReno is the modification of the standard implementation of the Fast Retransmit and Fast Recovery algorithms. The modification introduces partial acknowledgements and a new variable \texttt{recover}. Acknowledgement for a retransmitted packet will acknowledge some but not all of outstanding packets being transmitted. It is known as partial acknowledgement. The value of \texttt{recover} records the highest sequence number transmitted. When a TCP sender receives three duplicate ACKs, the value of \texttt{ssthresh} is reduced to half of the current congestion window and the TCP sender enters fast retransmit mechanism to recover the lost segment. When an ACK arrives, TCP New Reno will determine whether it acknowledges all of the data up to and including \texttt{recover}. If it is not affirmative, then the packet acknowledged by partial acknowledgement is retransmitted. This process continues until an acknowledgement, denoting the highest sequence number already transmitted, arrives and thereafter TCP NewReno \cite{tcpnewreno} will leave the fast recovery setting the value of \texttt{cwnd} to \texttt{ssthresh}. Then congestion avoidance algorithm takes place.
+
+
+TCP Vegas \cite{brakmo1995tcp} is a congestion avoidance algorithm based on packet delay rather than packet loss to control the transmission rate. TCP Vegas detects congestion based on increasing Round-Trip Time (RTT) values of the packets in the connection. The algorithm depends heavily on accurate calculation of the Base RTT value. If it is too small then throughput of the connection will be less than available capacity and the large value may overrun the connection.
+
+\section{Objective}
+
+We will analyse the network characteristics. For this we have selected three congestion algorithm from the literature; TCP vegas, TCP Reno and TCP newReno. The main reason behind choosing these three algorithms is that vegas is sensitive to delay, Reno and newReno are sensitive to packet loss.
+
+\section{Subnetting}
+
+Figure~\ref{fig1} demonstrates our test environment set up which consists of 7 routers running OSPF, five local area networks and WAN link is fiber with bandwidth 20Mbps and 1ms delay. The LAN is ethernet with 100Mbps for computer LANs and Ethernet 1Gbps for CDN networks. All the red links have IP addresses from 192.173.0.0/24 range and All the green links have IP address from 201.162.5.64/27 range. We attached two TCP applications in Turku LAN and in Oulu LAN.
+
+
+
+
+\begin{figure}[h!]
+%\begin{figure}[tbh] t= top, b = bottom, h=here
+\ \newline
+\begin{center}
+\includegraphics[scale=.4]{plan.eps}
+%\rotatebox{90}{\includegraphics[scale=.75]{kuvaesimerkki.pdf}}
+\caption{Organization network with subnet addresses}
+\label{fig1}
+\end{center}
+\end{figure}
+
+
+
+\section{Simulation Environment}
+
+We use omnet++ as simulation tool. In this assignment, we have performed networking simulation and utilize the INET2 module.
+
+
+
+ 
+% Note that IEEE does not put floats in the very first column - or typically
+% anywhere on the first page for that matter. Also, in-text middle ("here")
+% positioning is not used. Most IEEE journals/conferences use top floats
+% exclusively. Note that, LaTeX2e, unlike IEEE journals/conferences, places
+% footnotes above bottom floats. This can be corrected via the \fnbelowfloat
+% command of the stfloats package.
+
+\section{Result}
+
+
+
+
+\section{Analysis}
+
+ 
+
+\section{Conclusion}
+
+
+
+
+
+% trigger a \newpage just before the given reference
+% number - used to balance the columns on the last page
+% adjust value as needed - may need to be readjusted if
+% the document is modified later
+%\IEEEtriggeratref{8}
+% The "triggered" command can be changed if desired:
+%\IEEEtriggercmd{\enlargethispage{-5in}}
+
+% references section
+\nocite*{}
+\bibliographystyle{IEEEtran}
+\bibliography{ble}
+
+
+\end{document}
+
