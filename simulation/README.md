@@ -16,3 +16,12 @@ Add a case to the big switch-case in `IPv4Serializer::serialize()`:
       break;
 
 
+* Hack to src/networklayer/ipv4/RoutingTable.cc :
+ Change in RoutingTable::internalAddRoute():
+
+    // check that the interface exists
+    if (!entry->getInterface())
+    {
+        return;
+        //error("addRoute(): interface cannot be NULL");
+    }

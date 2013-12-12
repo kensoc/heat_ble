@@ -1,4 +1,4 @@
-\documentclass[conference,a4paper]{IEEEtran}
+\documentclass[conference,a4paper]{../../sty/IEEEtran}
 
 % *** GRAPHICS RELATED PACKAGES ***
 \ifCLASSINFOpdf
@@ -26,20 +26,6 @@
 \usepackage[cmex10]{amsmath}
 
 
-% *** SPECIALIZED LIST PACKAGES ***
-%\usepackage{algorithmic}
-
-
-% *** ALIGNMENT PACKAGES ***
-%\usepackage{array}
-
-
-% *** SUBFIGURE PACKAGES ***
-%\usepackage[tight,footnotesize]{subfigure}
-%\usepackage[caption=false]{caption}
-%\usepackage[font=footnotesize]{subfig}
-
-
 % *** PDF, URL AND HYPERLINK PACKAGES ***
 \usepackage{url}
 
@@ -59,7 +45,7 @@
 %
 % paper title
 % can use linebreaks \\ within to get better formatting as desired
-\title{Simulation Tools}
+\title{OMNeT++ Network Simulation}
 
 
 % author names and affiliations
@@ -77,7 +63,12 @@ zhen-huan.hwang and hasan.islam @aalto.fi}}
 
 \begin{abstract}
 
-In this assignment, we use omnet++ simulation tool to investigate the TCP congestion control algorithms. The objective of this assignment is to familiarize with omnet++, modifying TCP stack at host level and running TCP congestion control algorithms. Finally we provide analysis from the trace we found from omnet++ tool.
+OMNeT++ is an open-source network simulation tool and is free for academic usage.
+The main objective of this assignment is to familiarise ourselves with OMNeT++.
+In this assignment, we use OMNeT++ simulation tool to evaluate three TCP congestion control algorithms under different network characteristics.
+We modify host specific TCP parameters to select different TCP congestion control algorithms.
+Variation of network characteristics is done through relevant configuration files.
+Finally, we provide an analysis of the trace we obtained from OMNeT++ simulation.
 
 \end{abstract}
 % IEEEtran.cls defaults to using nonbold math in the Abstract.
@@ -93,6 +84,15 @@ In this assignment, we use omnet++ simulation tool to investigate the TCP conges
 
 \section{Introduction}
 % no \IEEEPARstart
+
+OMNeT++ is an open-source network simulation tool and is free for academic usage.
+It is accompanied by a rich set of documentation, addons, and examples.
+It is therefore a good idea for us in computer networking related fields to familiarise ourselves with OMNeT++.
+In order to fulfil this main objective, we will set up a simplified version of Finland national backbone and do some experiments.
+This required us to develop the OMNeT++ model, devise and deploy a subnet scheme, configure some routing mechnism to make the model a connected network, and finally deploy TCP test applications in the network.
+
+\subsection{TCP and congestion control}
+
 TCP \cite{tcp} is a connection-oriented, reliable standard transport protocol. TCP is able to recover data that is damaged, lost, duplicated, or delivered out of order through Internet. TCP sender uses sequence numbers and acknowledgements from a receiver to recover for flow control and error control.
 
 TCP provides flow and congestion control mechanisms through the use of congestion window. TCP starts a retransmission timer when an downstream segment is passed down to IP. If there is no acknowledgement from the receiver for the data in a given segment before the timer expires, then the segment is retransmitted. If the network is congested, the sender increases the window size by a fixed number every RTT. In response to congestion detection, the sender decreases the transmission rate by a multiplicative factor, for instance, the congestion window is decreased by half. This algorithm is known as Additive increase, multiplicative decrease (AIMD) of the sending rate. The acknowledgement (ACK) number from receiver determines a range of acceptable sequence numbers beyond the last segment successfully received. 
@@ -100,7 +100,7 @@ TCP provides flow and congestion control mechanisms through the use of congestio
 
 TCP Reno is a variant of basic TCP congestion protocol. It applies four congestion control mechanisms: slow-start, congestion avoidance, fast retransmit and fast recovery. Slow-start and congestion avoidance algorithms are utilized to control the amount of outstanding data being pushed into the network. TCP sender uses congestion window to limit the amount of data in sender side to be injected into the network before receiving an acknowledgement (ACK). Flow control is achieved through receiver's advertised window (\texttt{rwnd}) on the amount of outstanding data. Another state variable, the slow start threshold (\texttt{ssthresh}), defines the margin to promote the sender switching from the slow-start to congestion avoidance algorithm.
 
-At the beginning of transmission into a network with unknown conditions, TCP applies slow-start algorithm to determine the available capacity of the network instead of injecting large burst of data congesting the network. This algorithm is also used after loss recovery by the retransmission timer. A non standard, experimental TCP extension states that the initial value of \texttt{cwnd} can be defined as the following equation \cite{allman1998increasing}:
+At the beginning of transmission into a network with unknown conditions, TCP applies slow-start algorithm to determine the available capacity of the network instead of injecting large burst of data congesting the network. This algorithm is also used after loss recovery by the retransmission timer. A non standard, experimental TCP extension states that the initial value of \texttt{cwnd} can be defined as the following equation \cite{RFC2414}:
 
 \begin{equation}
    cwnd = min (4\times SMSS, max (2 \times SMSS, 4380 bytes))
@@ -131,56 +131,53 @@ Generally, TCP Reno \cite{tcpreno} is not able to recover multiple losses of pac
 
 TCP Vegas \cite{brakmo1995tcp} is a congestion avoidance algorithm based on packet delay rather than packet loss to control the transmission rate. TCP Vegas detects congestion based on increasing Round-Trip Time (RTT) values of the packets in the connection. The algorithm depends heavily on accurate calculation of the Base RTT value. If it is too small then throughput of the connection will be less than available capacity and the large value may overrun the connection.
 
-\section{Objective}
+\section{Implementation}
+We use OMNeT++ as simulation tool. In this assignment, we have performed networking simulation and utilize the INET2 module.
 
-We will analyse the network characteristics. For this we have selected three congestion algorithm from the literature; TCP vegas, TCP Reno and TCP newReno. The main reason behind choosing these three algorithms is that vegas is sensitive to delay, Reno and newReno are sensitive to packet loss.
+\subsection{Subnetting}
 
-\section{Subnetting}
+Figure \ref{fig1} illustrates our test environment set up which consists of seven routers running OSPFv2 and five local area networks.
+WAN links are optical fibre with 20Mbps bandwidth and 1ms delay.
+The LANs are 100Mbps Ethernet computer LANs and 1Gbps Ethernet CDN networks.
+All red links have IP addresses in 192.173.0.0/24 subnet and all green links have IP address from 201.162.5.64/27 subnet.
+TCP test applications are run in the hosts attached to Turku LAN and to Oulu LAN.
 
-Figure~\ref{fig1} demonstrates our test environment set up which consists of 7 routers running OSPF, five local area networks and WAN link is fiber with bandwidth 20Mbps and 1ms delay. The LAN is ethernet with 100Mbps for computer LANs and Ethernet 1Gbps for CDN networks. All the red links have IP addresses from 192.173.0.0/24 range and All the green links have IP address from 201.162.5.64/27 range. We attached two TCP applications in Turku LAN and in Oulu LAN.
 
-
-
-
-\begin{figure}[h!]
-%\begin{figure}[tbh] t= top, b = bottom, h=here
-\ \newline
+\begin{figure}[h]
 \begin{center}
-\includegraphics[scale=.4]{plan.eps}
-%\rotatebox{90}{\includegraphics[scale=.75]{kuvaesimerkki.pdf}}
-\caption{Organization network with subnet addresses}
+\includegraphics[scale=0.5]{plan.eps}
+\caption{Test network -- OurSuomi}
 \label{fig1}
 \end{center}
 \end{figure}
 
+\subsection{Routing}
+
+\subsection{TCP applications}
+
+\subsection{Challenges}
+deficiencies of OMNeT++: hacks.
 
 
-\section{Simulation Environment}
+\section{Experiments}
 
-We use omnet++ as simulation tool. In this assignment, we have performed networking simulation and utilize the INET2 module.
+We will analyse the network characteristics. For this we have selected three congestion algorithm from the literature; TCP vegas, TCP Reno and TCP newReno. The main reason behind choosing these three algorithms is that vegas is sensitive to delay, Reno and newReno are sensitive to packet loss.
 
+CPU intensive
 
-
- 
-% Note that IEEE does not put floats in the very first column - or typically
-% anywhere on the first page for that matter. Also, in-text middle ("here")
-% positioning is not used. Most IEEE journals/conferences use top floats
-% exclusively. Note that, LaTeX2e, unlike IEEE journals/conferences, places
-% footnotes above bottom floats. This can be corrected via the \fnbelowfloat
-% command of the stfloats package.
 
 \section{Result}
 
 
-
-
 \section{Analysis}
 
- 
 
 \section{Conclusion}
+Our implementation is available at: \url{https://github.com/zwuh/heat_ble/}.
 
 
+\section*{Acknowledgement}
+The authors would like to thank Vu Ba Tien Dung for his guidance throughout this project.
 
 
 
@@ -194,8 +191,8 @@ We use omnet++ as simulation tool. In this assignment, we have performed network
 
 % references section
 \nocite*{}
-\bibliographystyle{IEEEtran}
-\bibliography{ble}
+\bibliographystyle{../../sty/IEEEtran}
+\bibliography{OMNeT}
 
 
 \end{document}
