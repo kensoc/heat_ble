@@ -13,13 +13,6 @@ network OurSuomi
     parameters:
         @display("p=10,10;b=712,152");
     types:
-        channel CoreFibre extends ThruputMeteringChannel
-        {
-            delay = 1ms;
-            datarate = 20Mbps;
-            thruputDisplayFormat = "#N";
-            @display("ls=red,2");
-        }
         channel LANTx extends ThruputMeteringChannel
         {
             datarate = 100Mbps;
@@ -152,4 +145,12 @@ network OurSuomi
         sLANOulu.ethg[0] <--> LANTx <--> rOulu.ethg[0];
         tcpSource.ethg[0] <--> LANTx <--> sLANTurku.ethg[1];
         tcpSink.ethg[0] <--> LANTx <--> sLANOulu.ethg[1];
+}
+
+channel CoreFibre extends ThruputMeteringChannel
+{
+    parameters:
+        datarate = 20Mbps;
+        thruputDisplayFormat = "#N";
+        @display("ls=red,2");
 }
