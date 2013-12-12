@@ -63,4 +63,10 @@ proguard/
 *.tdo
 
 ble.pdf
-heat.pdf
+omnet.pdf
+.tkenv*
+.nedfolders
+.settings/
+out/
+results/
+*~
