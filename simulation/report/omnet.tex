@@ -29,6 +29,9 @@
 % *** PDF, URL AND HYPERLINK PACKAGES ***
 \usepackage{url}
 
+\usepackage{subcaption}
+\usepackage{morefloats}
+
 
 % *** Do not adjust lengths that control margins, column widths, etc. ***
 % *** Do not use packages that alter fonts (such as pslatex).         ***
@@ -167,6 +170,772 @@ CPU intensive
 
 
 \section{Result}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-0_thru}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-0_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-0_wnd}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-0_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 1-0: TCP Reno + 10 ms delay}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-1_thru}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-1_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-1_wnd}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-1_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 1-1: TCP Reno + 50 ms delay}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-2_thru}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-2_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-2_wnd}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-2_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 1-2: TCP Reno + 200 ms delay}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-3_thru}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-3_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-3_wnd}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-3_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 1-3: TCP Reno + 250 delay}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-0_thru}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-0_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-0_wnd}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-0_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 2-0: TCP Reno + 1\% error}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-1_thru}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-1_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-1_wnd}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-1_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 2-1: TCP Reno + 5\% error}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-2_thru}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-2_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-2_wnd}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-2_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 2-2: TCP Reno + 10\% error}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-3_thru}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-3_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-3_wnd}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-3_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 2-3: TCP Reno + 20\% error}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s3-0_thru}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s3-0_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s3-0_wnd}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s3-0_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 3: TCP Reno + Router failure}
+\end{figure}
+
+%==============
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-0_thru}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-0_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-0_wnd}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-0_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 1-0: TCP Reno + 10 ms delay}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-1_thru}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-1_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-1_wnd}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-1_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 1-1: TCP Reno + 50 ms delay}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-2_thru}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-2_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-2_wnd}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-2_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 1-2: TCP Reno + 200 ms delay}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-3_thru}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-3_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-3_wnd}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s1-3_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 1-3: TCP Reno + 250 delay}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-0_thru}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-0_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-0_wnd}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-0_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 2-0: TCP Reno + 1\% error}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-1_thru}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-1_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-1_wnd}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-1_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 2-1: TCP Reno + 5\% error}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-2_thru}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-2_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-2_wnd}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-2_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 2-2: TCP Reno + 10\% error}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-3_thru}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-3_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-3_wnd}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s2-3_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 2-3: TCP Reno + 20\% error}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s3-0_thru}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s3-0_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s3-0_wnd}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s3-0_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 3: TCP Reno + Router failure}
+\end{figure}
+
+\clearpage
+
+% =============
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s4-0_thru}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s4-0_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s4-0_wnd}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s4-0_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 4-0: TCP New Reno + 10 ms delay}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s4-1_thru}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s4-1_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s4-1_wnd}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s4-1_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 4-1: TCP New Reno + 50 ms delay}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s4-2_thru}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s4-2_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s4-2_wnd}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s4-2_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 4-2: TCP New Reno + 200 ms delay}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s4-3_thru}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s4-3_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s4-3_wnd}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s4-3_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 4-3: TCP New Reno + 250 delay}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s5-0_th}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s5-0_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s5-0_wsize}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s5-0_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 5-0: TCP New Reno + 1\% error}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s5-1_th}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s5-1_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s5-1_wsize}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s5-1_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 5-1: TCP New Reno + 5\% error}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s5-2_th}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s5-2_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s5-2_wsize}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s5-2_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 5-2: TCP New Reno + 10\% error}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s5-3_th}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s5-3_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s5-3_wsize}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s5-3_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 5-3: TCP New Reno + 20\% error}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s6-0_th}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s6-0_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s6-0_wsize}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s6-0_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 6: TCP New Reno + Router failure}
+\end{figure}
+
+\clearpage
+
+% =============
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s7-0_th}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s7-0_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s7-0_wsize}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s7-0_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 7-0: TCP Vegas + 10 ms delay}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s7-1_th}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s7-1_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s7-1_wsize}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s7-1_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 7-1: TCP Vegas + 50 ms delay}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s7-2_th}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s7-2_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s7-2_wsize}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s7-2_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 7-2: TCP Vegas + 200 ms delay}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s7-3_th}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s7-3_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s7-3_wsize}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s7-3_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 7-3: TCP Vegas + 250 delay}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s8-0_th}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s8-0_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s8-0_wsize}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s8-0_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 8-0: TCP Vegas + 1\% error}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s8-1_th}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s8-1_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s8-1_wsize}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s8-1_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 8-1: TCP Vegas + 5\% error}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s8-2_th}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s8-2_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s8-2_wsize}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s8-2_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 8-2: TCP Vegas + 10\% error}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s8-3_th}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s8-3_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s8-3_wsize}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s8-3_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 8-3: TCP Vegas + 20\% error}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s9-0_th}
+  \caption{Throughput}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s9-0_seq}
+  \caption{TCP sequence}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s9-0_wsize}
+  \caption{Window size}
+ \end{subfigure}
+ \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[width=\textwidth]{s9-0_rtt}
+  \caption{RTT}
+ \end{subfigure}
+ \caption{Scene 9: TCP Vegas + Router failure}
+\end{figure}
 
 
 \section{Analysis}
