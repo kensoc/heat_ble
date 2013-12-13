@@ -773,8 +773,17 @@ The crash of rHelsinki that follow will then force a route change through rTampe
 
 \section{Analysis}
 
+\begin{itemize}
+ \item For delay variation, we have not observed any significant difference for steady state throughput but TCP vegas starts slower than others. Even the window size and sequence numbers are also same for all in delay variation.
+ \item At 20$\%$ packet error rate, nothing gets through. But at lower rate, TCP vegas shows few long silent period. TCP reno and newReno shows frequent shorter silent period. We can say that Vegas maintains a good reliability and flow control in general than TCP reno and newReno.
+ \item TCP connection simply lost after first router failure. It takes some times to stabilize the route after router failure. The time required to restarts TCP connection is longer than the whole story we provided for router crash and restart.
+ 
+\end{itemize}
+
 
 \section{Conclusion}
+We observed that TCP vegas is resilient under the noise and link error. We have not noticed any significant differences in delay variation upto 250ms. Due to time limitation we could not be able to investigate longer delay variation. 
+
 Our implementation is available at: \url{https://github.com/zwuh/heat_ble/}.
 
 
